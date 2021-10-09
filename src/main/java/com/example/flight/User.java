@@ -1,40 +1,31 @@
 package com.example.flight;
 
 public class User {
-	String name;
-	int seatNumber;
-	int totalSeats;
-	String emailId;
-
+	public User(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+	private String name;
+	private String email;
+	private String password;
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getSeatNumber() {
-		return seatNumber;
+	public String getEmail() {
+		return email;
 	}
-
-	public void setSeatNumber(int seatNumber) {
-		this.seatNumber = seatNumber;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public int getTotalSeats() {
-		return totalSeats;
+	public String getPassword() {
+		return password;
 	}
-
-	public void setTotalSeats(int totalSeats) {
-		this.totalSeats = totalSeats;
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

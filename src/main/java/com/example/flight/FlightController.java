@@ -1,31 +1,60 @@
 package com.example.flight;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("flight")
+@RequestMapping("/api/v1.0/flight")
 public class FlightController {
 	@Autowired
 	FlightService flightService;
-	@GetMapping("/ticket/{name}")
-	String getTicket(@PathVariable String name) {
-		Flight flight = new Flight();
-		System.out.println("Pnr details are : " + flight.getPnr());
-		return ("PNR details are : "+flight.getPnr());
+	
+	@Autowired
+	AirlineClassService airlineClassService;
+	
+	@Autowired
+	AdminService adminService;
+	
+	@PostMapping("/airline/register")
+	Airline registerAirline(@RequestBody Airline airline) {
+		return airlineClassService.addAirline(airline);
 	}
+	
+	@PostMapping("/admin/login")
+	String adminLogin(@RequestBody Admin admin) {
+		try {
+			return adminService.login(admin);
+		} catch (Exception e) {
+			return "Invalid Arguement";
+		}
+	}
+	
+	@PostMapping("/admin/register")
+	Admin adminRegister(@RequestBody Admin admin) {
+		return adminService.createAdmin(admin);
+		
+	}
+	
+	@PostMapping("/search")
+	List<Flight> searchFlight(@RequestBody Flight flight) {
+		return flightService.searchFlight(flight);
+	}
+	
 	@PostMapping("/airline/inventory/add")
-	void addInventory() {
-		System.out.println("Added new flights");
+	String addInventory(@RequestBody Flight flight)  {
+		try {
+			flightService.addFlight(flight);
+		} catch (Exception e) {
+			return "Error";
+		}
+		return "Successfully added";
+		
+	
 	}
-	@PostMapping("/booking/{flightid}")
-	Flight post(@RequestBody Flight flight) {
-		System.out.println("Got the flight details on screen");
-		return flight;
-	}
+	
 }

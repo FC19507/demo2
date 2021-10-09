@@ -1,107 +1,100 @@
 package com.example.flight;
-import java.util.Random;
 
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+
+
+@Entity
 public class Flight {
-	int flightId;
-	String fromPlace;
-	String toPlace;
-	String airlineName;
-	float ticketPrice;
-	int businessSeats;
-	int non_businessSeats;
-	String date;
-	String time;
-	String days[];
-	int pnr;
-
-	public int getPnr() {
-		return pnr;
-	}
-
-	public void setPnr() {
-		Random rand = new Random();
-		int upperbound = 125;
-		int pNR = rand.nextInt(upperbound);
-		this.pnr = pNR;
-	}
-
-	public int getFlightId() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	private Integer flightId;
+	
+	private String flightName;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private AirlineClass airline;
+	private City fromPlace;
+	private City destination;
+	private Date takeOffTime;
+	private Date landingTime;
+	private int businessSeats;
+	private int nonBusinessSeats;
+	private float ticketCost;
+	private int noOfRows;
+	
+	public Integer getFlightId() {
 		return flightId;
 	}
-
-	public void setFlightId(int flightId) {
+	public void setFlightId(Integer flightId) {
 		this.flightId = flightId;
 	}
-
-	public String getFromPlace() {
+	public String getFlightName() {
+		return flightName;
+	}
+	public void setFlightName(String flightName) {
+		this.flightName = flightName;
+	}
+	public AirlineClass getAirline() {
+		return airline;
+	}
+	public void setAirline(AirlineClass airline) {
+		this.airline = airline;
+	}
+	public City getFromPlace() {
 		return fromPlace;
 	}
-
-	public void setFromPlace(String fromPlace) {
+	public void setFromPlace(City fromPlace) {
 		this.fromPlace = fromPlace;
 	}
-
-	public String getToPlace() {
-		return toPlace;
+	public Date getTakeOffTime() {
+		return takeOffTime;
 	}
-
-	public void setToPlace(String toPlace) {
-		this.toPlace = toPlace;
+	public void setTakeOffTime(Date takeOffTime) {
+		this.takeOffTime = takeOffTime;
 	}
-
-	public String getAirlineName() {
-		return airlineName;
+	public Date getLandingTime() {
+		return landingTime;
 	}
-
-	public void setAirlineName(String airlineName) {
-		this.airlineName = airlineName;
+	public void setLandingTime(Date landingTime) {
+		this.landingTime = landingTime;
 	}
-
-	public float getTicketPrice() {
-		return ticketPrice;
-	}
-
-	public void setTicketPrice(float ticketPrice) {
-		this.ticketPrice = ticketPrice;
-	}
-
 	public int getBusinessSeats() {
 		return businessSeats;
 	}
-
 	public void setBusinessSeats(int businessSeats) {
 		this.businessSeats = businessSeats;
 	}
-
-	public int getNon_businessSeats() {
-		return non_businessSeats;
+	public int getNonBusinessSeats() {
+		return nonBusinessSeats;
 	}
-
-	public void setNon_businessSeats(int non_businessSeats) {
-		this.non_businessSeats = non_businessSeats;
+	public void setNonBusinessSeats(int nonBusinessSeats) {
+		this.nonBusinessSeats = nonBusinessSeats;
 	}
-
-	public String getDate() {
-		return date;
+	public float getTicketCost() {
+		return ticketCost;
 	}
-
-	public void setDate(String date) {
-		this.date = date;
+	public void setTicketCost(float ticketCost) {
+		this.ticketCost = ticketCost;
 	}
-
-	public String getTime() {
-		return time;
+	public int getNoOfRows() {
+		return noOfRows;
 	}
-
-	public void setTime(String time) {
-		this.time = time;
+	public void setNoOfRows(int noOfRows) {
+		this.noOfRows = noOfRows;
 	}
-
-	public String[] getDays() {
-		return days;
+	public City getDestination() {
+		return destination;
 	}
-
-	public void setDays(String[] days) {
-		this.days = days;
+	public void setDestination(City destination) {
+		this.destination = destination;
 	}
+	
 }
